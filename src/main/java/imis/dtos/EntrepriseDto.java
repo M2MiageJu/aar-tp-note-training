@@ -1,7 +1,12 @@
 package imis.dtos;
 
+import imis.entities.Contact;
 import imis.entities.Entreprise;
 import imis.entities.MotCle;
+import imis.entities.Vente;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntrepriseDto {
 
@@ -13,55 +18,21 @@ public class EntrepriseDto {
 
     private String adresse;
 
-    private MotCle motCle;
+    private List<MotCle> motCles = new ArrayList<>();
+
+    private List<Contact> contacts = new ArrayList<>();
+
+    private List<Vente> ventes = new ArrayList<>();
 
     public EntrepriseDto(){}
 
-    public EntrepriseDto(Long id, String nom, String siret, String adresse, MotCle motCle) {
-        this.id = id;
-        this.nom = nom;
-        this.siret = siret;
-        this.adresse = adresse;
-        this.motCle = motCle;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getSiret() {
-        return siret;
-    }
-
-    public void setSiret(String siret) {
-        this.siret = siret;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public MotCle getMotCle() {
-        return motCle;
-    }
-
-    public void setMotCle(MotCle motCle) {
-        this.motCle = motCle;
+    public EntrepriseDto(Entreprise entreprise) {
+        this.id = entreprise.getId();
+        this.nom = entreprise.getNom();
+        this.siret = entreprise.getSiret();
+        this.adresse = entreprise.getAdresse();
+        this.motCles = entreprise.getMotCles();
+        this.contacts = entreprise.getContacts();
+        this.ventes = entreprise.getVentes();
     }
 }

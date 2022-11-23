@@ -16,28 +16,29 @@ public class Entreprise {
 
     private String adresse;
 
-    @ManyToOne
-    private MotCle motCle;
+    @ManyToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
+    private List<MotCle>motCles = new ArrayList<>();
 
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contact> contacts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Vente> ventes = new ArrayList<>();
+
     public Entreprise(){}
 
-    public Entreprise(Long id, String nom, String siret, String adresse, MotCle motCle) {
-        this.id = id;
+    public Entreprise(String nom, String siret, String adresse) {
         this.nom = nom;
         this.siret = siret;
         this.adresse = adresse;
-        this.motCle = motCle;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -64,11 +65,27 @@ public class Entreprise {
         this.adresse = adresse;
     }
 
-    public MotCle getMotCle() {
-        return motCle;
+    public List<MotCle> getMotCles() {
+        return motCles;
     }
 
-    public void setMotCle(MotCle motCle) {
-        this.motCle = motCle;
+    public void setMotCles(List<MotCle> motCles) {
+        this.motCles = motCles;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public List<Vente> getVentes() {
+        return ventes;
+    }
+
+    public void setVentes(List<Vente> ventes) {
+        this.ventes = ventes;
     }
 }

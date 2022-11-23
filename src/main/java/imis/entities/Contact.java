@@ -1,13 +1,22 @@
 package imis.entities;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Contact extends Personne {
 
     private String numTelephone;
 
     @ManyToOne
     private Entreprise entreprise;
+
+    @ManyToOne
+    private Fonction fonction;
+
+    @ManyToMany(mappedBy = "contacts", cascade = CascadeType.ALL)
+    private List<Echange>echanges = new ArrayList<>();
 
     public Contact() {
     }
@@ -25,4 +34,27 @@ public class Contact extends Personne {
         this.numTelephone = numTelephone;
     }
 
+    public Entreprise getEntreprise() {
+        return entreprise;
+    }
+
+    public void setEntreprise(Entreprise entreprise) {
+        this.entreprise = entreprise;
+    }
+
+    public Fonction getFonction() {
+        return fonction;
+    }
+
+    public void setFonction(Fonction fonction) {
+        this.fonction = fonction;
+    }
+
+    public List<Echange> getEchanges() {
+        return echanges;
+    }
+
+    public void setEchanges(List<Echange> echanges) {
+        this.echanges = echanges;
+    }
 }

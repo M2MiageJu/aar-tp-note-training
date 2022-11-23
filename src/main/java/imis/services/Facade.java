@@ -1,9 +1,7 @@
 package imis.services;
 
 import imis.dtos.EntrepriseDto;
-import imis.entities.Contact;
-import imis.entities.Entreprise;
-import imis.entities.Fonction;
+import imis.entities.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,18 +22,35 @@ public class Facade {
     EntityManager em;
 
     @Transactional
-    public void nouveauEnt(){
-       Entreprise entreprise = new Entreprise();
+    public void nouveauEnt(String nom, String siret, String adresse){
+        MotCle motCle = new MotCle();
+        Contact contact = new Contact();
+        Vente vente = new Vente();
+        Entreprise entreprise = new Entreprise(nom, siret, adresse);
+        entreprise.getVentes().add(vente);
+        entreprise.getContacts().add(contact);
+        entreprise.getMotCles().add(motCle);
+        em.getTransaction().begin();
+        em.persist(entreprise);
+        em.getTransaction().commit();
     }
 
     @Transactional
-    public void nouvelleFonction(){
-        Fonction fonction = new Fonction();
+    public void nouvelleFonction(String intitule){
+        Fonction fonction = new Fonction(intitule);
+        em.getTransaction().begin();
+        em.persist(fonction);
+        em.getTransaction().commit();
     }
 
     @Transactional
-    public void nouveauxContact(){
-        
+    public void nouveauxContact(String nom, String prenom, String email, String telephone, Entreprise entreprise, Fonction fonction){
+        Contact contact = new Contact(nom, prenom, email, telephone);
+        contact.setEntreprise(entreprise);
+        contact.setFonction(fonction);
+        em.getTransaction().begin();
+        em.persist(contact);
+        em.getTransaction().commit();
     }
 
     public Collection<Entreprise> getAllEntreprise(){
@@ -49,20 +64,19 @@ public class Facade {
     public List<Entreprise> findEntrepriseMotCleEntityGraph(String mcle){
         EntityGraph<Entreprise> eg=em.createEntityGraph(Entreprise.class);
         eg.addSubgraph("motCle");
-        Query q=em.createQuery("SELECT e FROM Entreprise e WHERE e.motCle =:motcle").setParameter("motcle", mcle);
+        Query q=em.createQuery("SELECT e FROM Entreprise e WHERE e.motCles =:motcle").setParameter("motcle", mcle);
         q.setHint("javax.persistence.loadgraph",eg);
         return q.getResultList();
     }
 
     public List<EntrepriseDto> getEntrepriseMotCle(String mcle){
         List<Entreprise> entreprises = findEntrepriseMotCleEntityGraph(mcle);
-        return entreprises.stream().map(e -> new EntrepriseDto(e.getId(), e.getNom(), e.getSiret(), e.getAdresse(), e.getMotCle())).collect(Collectors.toCollection(ArrayList::new));
+        return entreprises.stream().map(e -> new EntrepriseDto(e)).collect(Collectors.toCollection(ArrayList::new));
     }
-
 
     public EntrepriseDto getEntreprisePlusCont(){
         Entreprise entreprise = (Entreprise) em.createQuery("SELECT e FROM Entreprise e HAVING MAX(e.contacts)").getSingleResult();
-        return new EntrepriseDto(entreprise.getId(), entreprise.getNom(), entreprise.getSiret(), entreprise.getAdresse(), entreprise.getMotCle());
+        return new EntrepriseDto(entreprise);
     }
 
 }
