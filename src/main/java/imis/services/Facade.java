@@ -75,7 +75,7 @@ public class Facade {
     }
 
     public EntrepriseDto getEntreprisePlusCont(){
-        Entreprise entreprise = (Entreprise) em.createQuery("SELECT e FROM Entreprise e HAVING MAX(e.contacts)").getSingleResult();
+        Entreprise entreprise = (Entreprise) em.createQuery("SELECT e FROM Entreprise e GROUP BY e HAVING MAX(e.contacts)").getSingleResult();
         return new EntrepriseDto(entreprise);
     }
 

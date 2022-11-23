@@ -39,7 +39,8 @@ public class Controleur {
     }
 
     @PostMapping("createFonction")
-    public String createFonctionPost(){
+    public String createFonctionPost(String intitule){
+        facade.nouvelleFonction(intitule);
         return "hello";
     }
 
@@ -51,9 +52,9 @@ public class Controleur {
     }
 
     @PostMapping("createContact")
-    public String createContactPost(){
-        //  ajouter les paramètres de la méthode
-        //  créer la méthode dans la facade
+    public String createContactPost(Model model, String nom, String prenom, String email, String telephone, Entreprise entreprise, Fonction fonction){
+        facade.nouveauxContact(nom,prenom,email,telephone, entreprise, fonction);
+
         return "hello";
     }
 
