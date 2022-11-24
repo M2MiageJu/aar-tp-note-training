@@ -51,7 +51,7 @@ public class Facade {
 
     public List<Entreprise> findEntrepriseMotCleEntityGraph(String mcle){
         EntityGraph<Entreprise> eg=em.createEntityGraph(Entreprise.class);
-        eg.addSubgraph("motCle");
+        eg.addSubgraph("motCles");
         Query q=em.createQuery("SELECT e FROM Entreprise e WHERE e.motCles =:motcle").setParameter("motcle", mcle);
         q.setHint("javax.persistence.loadgraph",eg);
         return q.getResultList();
@@ -59,7 +59,7 @@ public class Facade {
 
     public List<EntrepriseDto> getEntrepriseMotCle(String mcle){
         List<Entreprise> entreprises = findEntrepriseMotCleEntityGraph(mcle);
-        return entreprises.stream().map(e -> new EntrepriseDto(e)).collect(Collectors.toCollection(ArrayList::new));
+        return entreprises.stream().map(EntrepriseDto::new).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public EntrepriseDto getEntreprisePlusCont(){
