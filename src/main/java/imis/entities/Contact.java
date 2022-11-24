@@ -9,8 +9,8 @@ public class Contact extends Personne {
 
     private String numTelephone;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Entreprise entreprise;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Entreprise entrepriseContact;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Fonction fonction;
@@ -35,11 +35,11 @@ public class Contact extends Personne {
     }
 
     public Entreprise getEntreprise() {
-        return entreprise;
+        return entrepriseContact;
     }
 
     public void setEntreprise(Entreprise entreprise) {
-        this.entreprise = entreprise;
+        this.entrepriseContact = entreprise;
     }
 
     public Fonction getFonction() {

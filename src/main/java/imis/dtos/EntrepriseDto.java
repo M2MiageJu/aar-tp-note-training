@@ -35,4 +35,60 @@ public class EntrepriseDto {
         this.contacts = entreprise.getContacts();
         this.ventes = entreprise.getVentes();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getSiret() {
+        return siret;
+    }
+
+    public void setSiret(String siret) {
+        this.siret = siret;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public List<MotCle> getMotCles() {
+        return motCles;
+    }
+
+    public void setMotCles(List<MotCle> motCles) {
+        this.motCles = motCles;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public List<Vente> getVentes() {
+        return ventes;
+    }
+
+    public void setVentes(List<Vente> ventes) {
+        this.ventes = ventes;
+    }
 }

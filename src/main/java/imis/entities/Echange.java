@@ -16,7 +16,7 @@ public class Echange {
     private String compteRendu;
 
     @ManyToOne
-    private Entreprise entreprise;
+    private Entreprise entrepriseEchange;
 
     @ManyToMany
     private List<Employe>employes;
@@ -28,7 +28,7 @@ public class Echange {
     public Echange(Date dateEchange, String compteRendu, Entreprise entreprise) {
         this.dateEchange = dateEchange;
         this.compteRendu = compteRendu;
-        this.entreprise = entreprise;
+        this.entrepriseEchange = entreprise;
     }
 
     public Long getId() {
@@ -56,11 +56,11 @@ public class Echange {
     }
 
     public Entreprise getEntreprise() {
-        return entreprise;
+        return entrepriseEchange;
     }
 
     public void setEntreprise(Entreprise entreprise) {
-        this.entreprise = entreprise;
+        this.entrepriseEchange = entreprise;
     }
 
     public List<Employe> getEmployes() {

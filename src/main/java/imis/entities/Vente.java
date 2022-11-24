@@ -16,7 +16,7 @@ public class Vente {
     private String nature;
 
     @ManyToOne
-    private Entreprise entreprise;
+    private Entreprise entrepriseVente;
 
     public Vente(){}
 
@@ -25,7 +25,7 @@ public class Vente {
         this.dateVente = dateVente;
         this.montant = montant;
         this.nature = nature;
-        this.entreprise = entreprise;
+        this.entrepriseVente = entreprise;
     }
 
     public Long getId() {
@@ -61,10 +61,10 @@ public class Vente {
     }
 
     public Entreprise getEntreprise() {
-        return entreprise;
+        return entrepriseVente;
     }
 
     public void setEntreprise(Entreprise entreprise) {
-        this.entreprise = entreprise;
+        this.entrepriseVente = entreprise;
     }
 }

@@ -51,8 +51,7 @@ public class Facade {
 
     public List<Entreprise> findEntrepriseMotCleEntityGraph(String mcle){
         EntityGraph<Entreprise> eg=em.createEntityGraph(Entreprise.class);
-        eg.addSubgraph("motCles");
-        Query q=em.createQuery("SELECT e FROM Entreprise e WHERE e.motCles =:motcle").setParameter("motcle", mcle);
+        Query q=em.createQuery("SELECT e FROM Entreprise e WHERE e.nomEntreprise =:motcle OR e.adresse =:motcle").setParameter("motcle", mcle);
         q.setHint("javax.persistence.loadgraph",eg);
         return q.getResultList();
     }
@@ -63,8 +62,9 @@ public class Facade {
     }
 
     public EntrepriseDto getEntreprisePlusCont(){
-        List entreprises = em.createQuery("SELECT e FROM Entreprise e").getResultList();
-        Entreprise entreprise = (Entreprise) entreprises.get(0);
+        Entreprise entreprise = em.createQuery("SELECT e FROM Entreprise e ORDER BY SIZE(e.contacts) DESC", Entreprise.class)
+                .setMaxResults(1)
+                .getSingleResult();
         return new EntrepriseDto(entreprise);
     }
 

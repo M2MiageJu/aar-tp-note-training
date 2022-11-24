@@ -16,16 +16,16 @@ public class Entreprise {
 
     private String adresse;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "entreprisesMotCles")
     private List<MotCle>motCles;
 
-    @OneToMany(mappedBy = "entreprise", orphanRemoval = true)
+    @OneToMany(mappedBy = "entrepriseContact", orphanRemoval = true)
     private List<Contact> contacts;
 
-    @OneToMany(mappedBy = "entreprise")
+    @OneToMany(mappedBy = "entrepriseVente")
     private List<Vente> ventes;
 
-    @OneToMany(mappedBy = "entreprise")
+    @OneToMany(mappedBy = "entrepriseEchange")
     private List<Echange> echanges;
 
     public Entreprise(){}

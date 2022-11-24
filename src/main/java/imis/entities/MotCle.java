@@ -9,7 +9,7 @@ public class MotCle {
     private String idMotCle;
 
     @ManyToMany
-    private List<Entreprise>entreprises;
+    private List<Entreprise>entreprisesMotCles;
 
     public MotCle() {}
 
@@ -26,10 +26,10 @@ public class MotCle {
     }
 
     public List<Entreprise> getEntreprises() {
-        return entreprises;
+        return entreprisesMotCles;
     }
 
     public void setEntreprises(List<Entreprise> entreprises) {
-        this.entreprises = entreprises;
+        this.entreprisesMotCles = entreprises;
     }
 }
