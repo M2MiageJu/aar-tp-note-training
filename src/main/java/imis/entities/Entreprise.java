@@ -7,28 +7,31 @@ import java.util.List;
 
 @Entity
 public class Entreprise {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     private Long id;
 
-    private String nom;
+    private String nomEntreprise;
 
     private String siret;
 
     private String adresse;
 
-    @ManyToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
-    private List<MotCle>motCles = new ArrayList<>();
+    @ManyToMany
+    private List<MotCle>motCles;
 
-    @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contact> contacts = new ArrayList<>();
+    @OneToMany(mappedBy = "entreprise", orphanRemoval = true)
+    private List<Contact> contacts;
 
-    @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Vente> ventes = new ArrayList<>();
+    @OneToMany(mappedBy = "entreprise")
+    private List<Vente> ventes;
+
+    @OneToMany(mappedBy = "entreprise")
+    private List<Echange> echanges;
 
     public Entreprise(){}
 
-    public Entreprise(String nom, String siret, String adresse) {
-        this.nom = nom;
+    public Entreprise(String nomEntreprise, String siret, String adresse) {
+        this.nomEntreprise = nomEntreprise;
         this.siret = siret;
         this.adresse = adresse;
     }
@@ -42,11 +45,11 @@ public class Entreprise {
     }
 
     public String getNom() {
-        return nom;
+        return nomEntreprise;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nomEntreprise = nom;
     }
 
     public String getSiret() {

@@ -7,11 +7,11 @@ import java.util.List;
 @Entity
 public class Fonction {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     private Long idFonction;
 
-    @OneToMany(mappedBy = "fonction", cascade = CascadeType.ALL)
-    private List<Contact>contacts = new ArrayList<>();
+    @OneToMany(mappedBy = "fonction", orphanRemoval = true)
+    private List<Contact>contacts;
 
     private String intituleFonction;
 

@@ -28,8 +28,8 @@ public class Controleur {
     }
 
     @PostMapping("createEntreprise")
-    public String createEntreprisePost() {
-       
+    public String createEntreprisePost(String nom, String siret, String adresse) {
+        facade.nouveauEnt(nom, siret, adresse);
         return "hello";
     }
 
@@ -52,21 +52,20 @@ public class Controleur {
     }
 
     @PostMapping("createContact")
-    public String createContactPost(Model model, String nom, String prenom, String email, String telephone, Entreprise entreprise, Fonction fonction){
-        facade.nouveauxContact(nom,prenom,email,telephone, entreprise, fonction);
-
+    public String createContactPost(String nom, String prenom, String email, String telephone, Entreprise entreprise, Fonction fonction){
+        facade.nouveauxContact(nom, prenom, email, telephone, entreprise, fonction);
         return "hello";
     }
 
     @GetMapping("plusContact")
     public String plusContact(Model model){
-        model.addAttribute("e", facade.getEntreprisePlusCont());
+        model.addAttribute("entreprise", facade.getEntreprisePlusCont());
         return "plusContact";
     }
 
     @GetMapping("parMotCle")
-    public String parMotCle(Model model, String mot){
-        model.addAttribute("entreprises", facade.getEntrepriseMotCle(mot));
+    public String parMotCle(Model model, String motcle){
+        model.addAttribute("entreprises", facade.getEntrepriseMotCle(motcle));
         return "entreprises";
     }
 }

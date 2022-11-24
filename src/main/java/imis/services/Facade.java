@@ -23,24 +23,14 @@ public class Facade {
 
     @Transactional
     public void nouveauEnt(String nom, String siret, String adresse){
-        MotCle motCle = new MotCle();
-        Contact contact = new Contact();
-        Vente vente = new Vente();
         Entreprise entreprise = new Entreprise(nom, siret, adresse);
-        entreprise.getVentes().add(vente);
-        entreprise.getContacts().add(contact);
-        entreprise.getMotCles().add(motCle);
-        em.getTransaction().begin();
         em.persist(entreprise);
-        em.getTransaction().commit();
     }
 
     @Transactional
     public void nouvelleFonction(String intitule){
         Fonction fonction = new Fonction(intitule);
-        em.getTransaction().begin();
         em.persist(fonction);
-        em.getTransaction().commit();
     }
 
     @Transactional
@@ -48,9 +38,7 @@ public class Facade {
         Contact contact = new Contact(nom, prenom, email, telephone);
         contact.setEntreprise(entreprise);
         contact.setFonction(fonction);
-        em.getTransaction().begin();
         em.persist(contact);
-        em.getTransaction().commit();
     }
 
     public Collection<Entreprise> getAllEntreprise(){
@@ -75,7 +63,8 @@ public class Facade {
     }
 
     public EntrepriseDto getEntreprisePlusCont(){
-        Entreprise entreprise = (Entreprise) em.createQuery("SELECT e FROM Entreprise e GROUP BY e HAVING MAX(e.contacts)").getSingleResult();
+        List entreprises = em.createQuery("SELECT e FROM Entreprise e").getResultList();
+        Entreprise entreprise = (Entreprise) entreprises.get(0);
         return new EntrepriseDto(entreprise);
     }
 

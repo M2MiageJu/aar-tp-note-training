@@ -1,29 +1,28 @@
 package imis.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class MotCle {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @Id @GeneratedValue
+    private String idMotCle;
 
-    @ManyToMany(mappedBy = "motcle", cascade = CascadeType.ALL)
-    private List<Entreprise>entreprises = new ArrayList<>();
+    @ManyToMany
+    private List<Entreprise>entreprises;
 
     public MotCle() {}
 
     public MotCle(String id) {
-        this.id = id;
+        this.idMotCle = id;
     }
 
     public String getId() {
-        return id;
+        return idMotCle;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idMotCle = id;
     }
 
     public List<Entreprise> getEntreprises() {

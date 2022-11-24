@@ -9,14 +9,14 @@ public class Contact extends Personne {
 
     private String numTelephone;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Entreprise entreprise;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Fonction fonction;
 
-    @ManyToMany(mappedBy = "contacts", cascade = CascadeType.ALL)
-    private List<Echange>echanges = new ArrayList<>();
+    @ManyToMany
+    private List<Echange>echanges;
 
     public Contact() {
     }

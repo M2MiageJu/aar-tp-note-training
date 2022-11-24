@@ -6,8 +6,8 @@ import java.util.Date;
 @Entity
 public class Vente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private Long idVente;
 
     private Date dateVente;
 
@@ -21,7 +21,7 @@ public class Vente {
     public Vente(){}
 
     public Vente(Long id, Date dateVente, double montant, String nature, Entreprise entreprise) {
-        this.id = id;
+        this.idVente = id;
         this.dateVente = dateVente;
         this.montant = montant;
         this.nature = nature;
@@ -29,11 +29,11 @@ public class Vente {
     }
 
     public Long getId() {
-        return id;
+        return idVente;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idVente = id;
     }
 
     public Date getDateVente() {

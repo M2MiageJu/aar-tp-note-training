@@ -8,8 +8,8 @@ import java.util.List;
 @Entity
 public class Echange {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id @GeneratedValue
+    private Long idEchange;
 
     private Date dateEchange;
 
@@ -18,11 +18,11 @@ public class Echange {
     @ManyToOne
     private Entreprise entreprise;
 
-    @ManyToMany(mappedBy = "echange", cascade = CascadeType.ALL)
-    private List<Employe>employes = new ArrayList<>();
+    @ManyToMany
+    private List<Employe>employes;
 
-    @ManyToMany(mappedBy = "echange", cascade = CascadeType.ALL)
-    private List<Contact>contacts = new ArrayList<>();
+    @ManyToMany
+    private List<Contact>contacts;
 
     public Echange(){}
     public Echange(Date dateEchange, String compteRendu, Entreprise entreprise) {
@@ -32,11 +32,11 @@ public class Echange {
     }
 
     public Long getId() {
-        return id;
+        return idEchange;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idEchange = id;
     }
 
     public Date getDateEchange() {

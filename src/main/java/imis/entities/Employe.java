@@ -13,8 +13,8 @@ public class Employe extends Personne{
     @ManyToOne
     private ServiceInterne serviceInterne;
 
-    @ManyToMany(mappedBy = "employe", cascade = CascadeType.ALL)
-    private List<Echange>echanges = new ArrayList<>();
+    @ManyToMany
+    private List<Echange>echanges;
 
     public Employe() {
     }

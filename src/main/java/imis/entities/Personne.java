@@ -9,34 +9,34 @@ import javax.persistence.MappedSuperclass;
 public abstract class Personne {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private Long idPersonne;
 
-    private String nom;
-    private String prenom;
+    private String nomPersonne;
+    private String prenomPersonne;
 
     public Personne(){}
 
-    public Personne(String nom, String prenom, String email) {
-        this.nom = nom;
-        this.prenom = prenom;
+    public Personne(String nomPersonne, String prenomPersonne, String email) {
+        this.nomPersonne = nomPersonne;
+        this.prenomPersonne = prenomPersonne;
         this.email = email;
     }
 
     public String getNom() {
-        return nom;
+        return nomPersonne;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom(String nomPersonne) {
+        this.nomPersonne = nomPersonne;
     }
 
     public String getPrenom() {
-        return prenom;
+        return prenomPersonne;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setPrenom(String prenomPersonne) {
+        this.prenomPersonne = prenomPersonne;
     }
 
     public String getEmail() {
@@ -48,4 +48,12 @@ public abstract class Personne {
     }
 
     private String email;
+
+    public Long getIdPersonne() {
+        return idPersonne;
+    }
+
+    public void setIdPersonne(Long idPersonne) {
+        this.idPersonne = idPersonne;
+    }
 }
